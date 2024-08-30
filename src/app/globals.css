@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rhap_container {
+  background-color: transparent !important;
+}
+
+.rhap_time {
+  color: hsl(var(--nextui-foreground)) !important;
+}
+
+.rhap_progress-bar {
+  background-color: hsl(var(--nextui-content2)) !important;
+}
+
+.rhap_download-progress {
+  background-color: hsl(var(--nextui-content3)) !important;
+}
+
+.rhap_progress-filled {
+  background-color: hsl(var(--nextui-secondary)) !important;
+}
+
+.rhap_progress-indicator {
+  background-color: hsl(var(--nextui-secondary)) !important;
+}
+
+.rhap_volume-button {
+  color: hsl(var(--nextui-foreground)) !important;
+}
+
+.rhap_volume-bar {
+  background-color: hsl(var(--nextui-content2)) !important;
+}
+
+.rhap_volume-indicator {
+  background-color: hsl(var(--nextui-secondary)) !important;
+}
+
+*::-webkit-scrollbar {
+  height: 7px;
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: hsl(var(--nextui-default-300));
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--nextui-default-400));
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: hsl(var(--nextui-default-500));
+}

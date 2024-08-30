@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  fullName  String
+  email     String     @unique
+  password  String
+  image     String?    @default("")
+  playlists PlayList[]
+  favorite  Favorite?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model PlayList {
+  id          Int              @id @default(autoincrement())
+  name        String
+  description String?          @default("Mi Playlist")
+  image       String?          @default("")
+  userId      Int
+  user        User             @relation(fields: [userId], references: [id])
+  songs       SongOnPlaylist[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Favorite {
+  id        Int              @id @default(autoincrement())
+  userId    Int              @unique
+  user      User             @relation(fields: [userId], references: [id])
+  songs     SongOnFavorite[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+}
+
+model Song {
+  id        Int              @id @default(autoincrement())
+  idApi     String           @unique
+  title     String
+  artist    String
+  album     String
+  url       String
+  image     String
+  playLists SongOnPlaylist[]
+  favorites SongOnFavorite[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+}
+
+model SongOnPlaylist {
+  song       Song     @relation(fields: [songId], references: [id])
+  songId     Int
+  playlist   PlayList @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  playlistId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@id([songId, playlistId])
+}
+
+model SongOnFavorite {
+  song       Song     @relation(fields: [songId], references: [id])
+  songId     Int
+  favorite   Favorite @relation(fields: [favoriteId], references: [id])
+  favoriteId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@id([songId, favoriteId])
+}
