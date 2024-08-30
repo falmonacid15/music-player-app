@@ -2,7 +2,7 @@
 
 Aplicacion web responsive capaz de reproducir canciones, puedes buscarlas por sus nombres, artistas o album, ademas puedes crearte una cuenta y acceder a la posibilidad de guardar favoritas y crear listas de reproduccion.
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo](https://res.cloudinary.com/dlw31usvu/image/upload/v1725011769/music-app/hatdg24v9hgtoqoyjcma.png)
 
 ## Variables de entorno
 
