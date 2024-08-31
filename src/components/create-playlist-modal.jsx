@@ -1,6 +1,7 @@
 "use client";
-import { useMusicAppStore } from "@/store/MusicAppStore";
-import { useUserDataStore } from "@/store/UserDataStore";
+
+import { useMusicAppStore } from "@/store/music-app-store";
+import { useUserDataStore } from "@/store/user-data-store";
 import {
   Button,
   Input,
@@ -14,8 +15,7 @@ import {
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { PiImageFill, PiXBold } from "react-icons/pi";
+import { useForm } from "react-hook-form";
 
 export default function CreatePlaylistModal({ isOpen, onOpenChange }) {
   const {
@@ -24,7 +24,6 @@ export default function CreatePlaylistModal({ isOpen, onOpenChange }) {
     formState: { errors },
     reset,
     watch,
-    control,
     setValue,
   } = useForm();
 

@@ -1,5 +1,5 @@
-import { useMusicAppStore } from "@/store/MusicAppStore";
-import { useUserDataStore } from "@/store/UserDataStore";
+import { useMusicAppStore } from "@/store/music-app-store";
+import { useUserDataStore } from "@/store/user-data-store";
 import {
   Button,
   Card,
@@ -45,9 +45,7 @@ export default function PlayListCard({
     try {
       const res = await axios.delete(`/api/playlists/${id}/${session.user.id}`);
       setPlaylists(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleEdit = () => {

@@ -1,8 +1,8 @@
 "use client";
-import { useMusicAppStore } from "@/store/MusicAppStore";
+
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import MusicPlayerSongCard from "./MusicPlayerSongCard";
+import MusicPlayerSongCard from "./music-player-song-card";
 import {
   IoPauseCircle,
   IoPlayBack,
@@ -12,13 +12,15 @@ import {
   IoPlaySkipForward,
 } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { useMediaQuery } from "@uidotdev/usehooks";
+import { useMusicAppStore } from "@/store/music-app-store";
 
 const MusicPlayer = () => {
   const { currentPlaying, songsArray, setIsPlaying, isPlaying } =
     useMusicAppStore();
   const [songUrl, setSongUrl] = useState("");
-  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+
+  const isSmallDevice =
+    typeof window !== "undefined" && window.innerWidth < 768;
 
   useEffect(() => {
     if (currentPlaying) {

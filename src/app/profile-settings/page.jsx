@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Button, Image, Input } from "@nextui-org/react";
+import { Avatar, Button, Input } from "@nextui-org/react";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
@@ -18,7 +18,6 @@ const ProfileSettings = () => {
   const { register, handleSubmit, setValue, watch, control } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     if (!isEditing) {
       setIsEditing(true);
       return;
@@ -27,9 +26,15 @@ const ProfileSettings = () => {
       try {
         const formData = new FormData();
         formData.append("fullName", data.name);
-        formData.append("currentPassword", data.currentPassword);
-        formData.append("newPassword", data.newPassword);
-        formData.append("imageFile", data.image);
+
+        if (data.newPassword && data.currentPassword) {
+          formData.append("currentPassword", data.currentPassword);
+          formData.append("newPassword", data.newPassword);
+        }
+
+        if (data.image) {
+          formData.append("image", data.image);
+        }
 
         const res = await axios.patch(
           `/api/auth/update-profile/${session.user.id}`,
@@ -56,6 +61,7 @@ const ProfileSettings = () => {
       setValue("name", session.user.name);
       setCurrentImage(session.user.image);
     }
+    document.title = "MusicApp - Configuracion de cuenta";
   }, []);
 
   return (
@@ -93,6 +99,7 @@ const ProfileSettings = () => {
               label="Nombre"
               placeholder="Nombre"
               variant="underlined"
+              isDisabled={!isEditing}
               value={watch("name")}
               {...register("name")}
             />
@@ -101,6 +108,7 @@ const ProfileSettings = () => {
               label="Nueva contraseña"
               placeholder="Ingrese su nueva contraseña si desea cambiarla"
               variant="underlined"
+              isDisabled={!isEditing}
               {...register("newPassword")}
             />
             <Input
@@ -108,6 +116,7 @@ const ProfileSettings = () => {
               label="Contraseña actual"
               placeholder="Ingrese su contraseña actual para confirmar los cambios"
               variant="underlined"
+              isDisabled={!isEditing}
               {...register("currentPassword")}
             />
 
@@ -156,6 +165,7 @@ const ProfileSettings = () => {
                             onChange(file);
                           }
                         }}
+                        disabled={!isEditing}
                       />
                       {value ? (
                         <div className="relative inline-block">

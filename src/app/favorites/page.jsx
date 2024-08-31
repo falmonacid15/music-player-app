@@ -1,12 +1,14 @@
 "use client";
-import SongCard from "@/components/song-card/SongCard";
-import { useUserDataStore } from "@/store/UserDataStore";
+
 import { Button } from "@nextui-org/react";
 import { IoPlay } from "react-icons/io5";
 import { motion } from "framer-motion";
-import { useMusicAppStore } from "@/store/MusicAppStore";
+
 import { appearanceAnimation } from "@/constants/appearance-animation-config";
-import BreadCrumbsCustom from "@/components/shared/bread-crumbs-custom";
+import { useUserDataStore } from "@/store/user-data-store";
+import { useMusicAppStore } from "@/store/music-app-store";
+import SongCard from "@/components/song-card/song-card";
+import { useEffect } from "react";
 
 const FavoritesPage = () => {
   const { favorites } = useUserDataStore();
@@ -20,6 +22,10 @@ const FavoritesPage = () => {
 
     setSongsArray(sanitizedFavorites);
   };
+
+  useEffect(() => {
+    document.title = "MusicApp - Favoritas";
+  }, []);
 
   return (
     <div>

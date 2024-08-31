@@ -4,8 +4,8 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { IoSearch } from "react-icons/io5";
 
-import { useMusicAppStore } from "@/store/MusicAppStore";
-import SearchDropDownItem from "./SearchDropDownItem";
+import SearchDropDownItem from "./search-dropdown-item";
+import { useMusicAppStore } from "@/store/music-app-store";
 
 function SongSearch() {
   const [search, setSearch] = useState("");

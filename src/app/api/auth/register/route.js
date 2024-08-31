@@ -50,7 +50,6 @@ export async function POST(request) {
 
     return NextResponse.json({ message: "Registro exitoso" }, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: "Algo salio mal" }, { status: 500 });
   }
 }

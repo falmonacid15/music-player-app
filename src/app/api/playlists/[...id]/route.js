@@ -41,8 +41,6 @@ export async function PATCH(request, { params }) {
 
     let userPlaylists = [];
 
-    console.log(song);
-
     if (song) {
       const findedSong = await prisma.song.upsert({
         where: {
@@ -167,7 +165,6 @@ export async function PATCH(request, { params }) {
 
     return NextResponse.json(userPlaylists, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
@@ -218,7 +215,6 @@ export async function DELETE(request, { params }) {
 
     return NextResponse.json(playlists, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: "Algo salio mal" }, { status: 500 });
   }
 }

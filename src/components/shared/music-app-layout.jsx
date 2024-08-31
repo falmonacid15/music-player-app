@@ -1,14 +1,14 @@
 "use client";
 
-import MusicPlayer from "./music-player/MusicPlayer";
-import NavbarApp from "./navbar/NavbarApp";
+import MusicPlayer from "./music-player/music-player";
+import NavbarApp from "./navbar/navbar-app";
 import { ScrollShadow } from "@nextui-org/react";
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const MusicAppLayout = ({ children }) => {
   return (
-    <div className="flex flex-col h-screen relative">
+    <div className="flex flex-col h-screen relative antialiased">
       <NavbarApp />
       <div className="flex-1 overflow-hidden  mb-20 ">
         <ToastContainer

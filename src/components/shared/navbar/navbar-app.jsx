@@ -8,13 +8,13 @@ import {
 } from "@nextui-org/react";
 
 import { useSession } from "next-auth/react";
-import ProfileDropdown from "./components/ProfileDropdown";
-import ThemeSwitch from "./components/ThemeSwitch";
+import ProfileDropdown from "./components/profile-dropdown";
+import ThemeSwitch from "./components/theme-switch";
 import NavBarLinks from "./components/navbar-links";
 import { useState } from "react";
 import NavBarReponsiveLinks from "./components/navbar-responsive-links";
-import AuthButtons from "./components/AuthButtons";
-import SongSearch from "./components/SongSearch";
+import AuthButtons from "./components/auth-buttons";
+import SongSearch from "./components/song-search-input";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { appearanceAnimation } from "@/constants/appearance-animation-config";

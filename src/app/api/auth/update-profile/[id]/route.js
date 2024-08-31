@@ -12,7 +12,7 @@ export async function PATCH(request, { params }) {
     const fullName = data.get("fullName");
     const currentPassword = data.get("currentPassword");
     const newPassword = data.get("newPassword");
-    const imageFile = data.get("imageFile");
+    const imageFile = data.get("image");
 
     const user = await prisma.user.findUnique({
       where: {
@@ -27,9 +27,11 @@ export async function PATCH(request, { params }) {
       );
     }
 
-    console.log(currentPassword, newPassword);
     if (currentPassword && newPassword) {
-      const isPasswordValid = bcrypt.compare(currentPassword, user.password);
+      const isPasswordValid = bcrypt.compareSync(
+        currentPassword,
+        user.password
+      );
 
       if (!isPasswordValid) {
         return NextResponse.json(
@@ -79,7 +81,6 @@ export async function PATCH(request, { params }) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: "Algo salio mal" }, { status: 500 });
   }
 }

@@ -5,12 +5,12 @@ import PlayListCard from "./components/playlist-card";
 import { PiFolderPlusFill } from "react-icons/pi";
 import CreatePlaylistModal from "@/components/create-playlist-modal";
 import { useSession } from "next-auth/react";
-import { useUserDataStore } from "@/store/UserDataStore";
 import axios from "axios";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { appearanceAnimation } from "@/constants/appearance-animation-config";
-import { useMusicAppStore } from "@/store/MusicAppStore";
+import { useUserDataStore } from "@/store/user-data-store";
+import { useMusicAppStore } from "@/store/music-app-store";
 
 export default function PlaylistsPage() {
   const playlistModal = useDisclosure();
@@ -23,15 +23,14 @@ export default function PlaylistsPage() {
     try {
       const res = await axios.get(`/api/playlists?user=${session.user.id}`);
       setPlaylists(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
     if (session) {
       fetchPlaylists();
     }
+    document.title = "MusicApp - Playlists";
   }, []);
 
   useEffect(() => {

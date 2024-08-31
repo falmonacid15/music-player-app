@@ -1,7 +1,6 @@
-import { useMusicAppStore } from "@/store/MusicAppStore";
-import { useUserDataStore } from "@/store/UserDataStore";
+import { useMusicAppStore } from "@/store/music-app-store";
+import { useUserDataStore } from "@/store/user-data-store";
 import {
-  Avatar,
   Button,
   Dropdown,
   DropdownItem,
@@ -14,17 +13,11 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { IoAddOutline, IoHeartOutline, IoHeartSharp } from "react-icons/io5";
-import { toast } from "react-toastify";
 
 const MusicPlayerSongCard = ({ song }) => {
   const { data: session, status } = useSession();
-  const {
-    favorites,
-    setFavorites,
-    handleClickFavorite,
-    playlists,
-    setPlaylists,
-  } = useUserDataStore();
+  const { favorites, handleClickFavorite, playlists, setPlaylists } =
+    useUserDataStore();
   const { currentPlaying } = useMusicAppStore();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,9 +46,7 @@ const MusicPlayerSongCard = ({ song }) => {
         },
       });
       setPlaylists(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

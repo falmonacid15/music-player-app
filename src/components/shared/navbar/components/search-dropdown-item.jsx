@@ -1,4 +1,4 @@
-import { useUserDataStore } from "@/store/UserDataStore";
+import { useUserDataStore } from "@/store/user-data-store";
 import { Button, Image } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import React from "react";
@@ -21,7 +21,13 @@ function SearchDropDownItem({ image, name, artists, album, idApi, url }) {
   return (
     <div className="h-[50px] w-[300px] flex gap-2 ml-2 mr-4 items-center">
       <div className="flex-shrink-0">
-        <Image src={image} width={50} height={50} shadow="sm" />
+        <Image
+          src={image}
+          width={50}
+          height={50}
+          shadow="sm"
+          alt={song.title}
+        />
       </div>
       <div className="overflow-hidden flex-grow">
         <p className="text-sm font-semibold truncate whitespace-nowrap">

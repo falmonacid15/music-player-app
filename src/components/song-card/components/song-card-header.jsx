@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { IoHeart, IoTrash } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import axios from "axios";
-import { useUserDataStore } from "@/store/UserDataStore";
 import { useSession } from "next-auth/react";
+import { useUserDataStore } from "@/store/user-data-store";
 
 export default function SongCardHeader({ playlistId, songId, song }) {
   const currentPath = usePathname();
@@ -23,7 +23,6 @@ export default function SongCardHeader({ playlistId, songId, song }) {
       );
       setSelectedPlaylistSongs(res.data.songs);
     } catch (error) {
-      console.log(error);
     } finally {
       setIsLoading(false);
     }

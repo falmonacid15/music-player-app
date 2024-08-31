@@ -42,9 +42,7 @@ export const useUserDataStore = create(
 
             set({ favorites: res2.data.songs });
           }
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       },
 
       playlists: [],

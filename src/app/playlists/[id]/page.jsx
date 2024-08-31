@@ -1,5 +1,5 @@
 "use client";
-import SongCard from "@/components/song-card/SongCard";
+
 import { Button } from "@nextui-org/react";
 import axios from "axios";
 import { useEffect } from "react";
@@ -7,9 +7,9 @@ import { IoPlay } from "react-icons/io5";
 
 import { motion } from "framer-motion";
 import { appearanceAnimation } from "@/constants/appearance-animation-config";
-import { useUserDataStore } from "@/store/UserDataStore";
-import { useMusicAppStore } from "@/store/MusicAppStore";
-import BreadCrumbsCustom from "@/components/shared/bread-crumbs-custom";
+import { useUserDataStore } from "@/store/user-data-store";
+import { useMusicAppStore } from "@/store/music-app-store";
+import SongCard from "@/components/song-card/song-card";
 
 function PlaylistWithId({ params }) {
   const {
@@ -26,13 +26,12 @@ function PlaylistWithId({ params }) {
       const response = await axios.get(`/api/playlists/${params.id}`);
       setSelectedPlaylistSongs(response.data.songs);
       setSelectedPlaylist(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
     fetchSelectedPlaylist();
+    document.title = `MusicApp - ${selectedPlaylist.name}`;
   }, [params]);
 
   return (

@@ -46,7 +46,6 @@ export async function GET(request) {
 
     return NextResponse.json(playlists, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
@@ -59,7 +58,7 @@ export async function POST(request) {
     const description = data.get("description");
     const userId = data.get("userId");
     const imageFile = data.get("imageFile");
-    const song = data.get("song");
+    const song = JSON.parse(data.get("song"));
 
     let imageUrl = "";
 
@@ -88,7 +87,7 @@ export async function POST(request) {
       await prisma.playList.create({
         data: {
           name: songFinded.title,
-          userId,
+          userId: parseInt(userId),
           image: songFinded.image,
           songs: {
             create: song
@@ -111,7 +110,7 @@ export async function POST(request) {
         },
       });
 
-      userPlaylists = await prisma.playList.findMany({
+      const findedPlaylists = await prisma.playList.findMany({
         where: {
           userId: parseInt(userId),
         },
@@ -122,6 +121,27 @@ export async function POST(request) {
             },
           },
         },
+      });
+
+      userPlaylists = findedPlaylists.map((playlist) => {
+        return {
+          id: playlist.id,
+          name: playlist.name,
+          description: playlist.description,
+          image: playlist.image,
+          images: playlist.songs.map((song) => song.song.image),
+          songs: playlist.songs.map((song) => {
+            return {
+              id: song.song.id,
+              idApi: song.song.idApi,
+              title: song.song.title,
+              artist: song.song.artist,
+              album: song.song.album,
+              url: song.song.url,
+              image: song.song.image,
+            };
+          }),
+        };
       });
 
       return NextResponse.json(userPlaylists, { status: 201 });
@@ -136,9 +156,9 @@ export async function POST(request) {
       },
     });
 
-    userPlaylists = await prisma.playList.findMany({
+    const findedPlaylists = await prisma.playList.findMany({
       where: {
-        userId: parseInt(userId),
+        userId: parseInt(user),
       },
       include: {
         songs: {
@@ -149,9 +169,29 @@ export async function POST(request) {
       },
     });
 
+    userPlaylists = findedPlaylists.map((playlist) => {
+      return {
+        id: playlist.id,
+        name: playlist.name,
+        description: playlist.description,
+        image: playlist.image,
+        images: playlist.songs.map((song) => song.song.image),
+        songs: playlist.songs.map((song) => {
+          return {
+            id: song.song.id,
+            idApi: song.song.idApi,
+            title: song.song.title,
+            artist: song.song.artist,
+            album: song.song.album,
+            url: song.song.url,
+            image: song.song.image,
+          };
+        }),
+      };
+    });
+
     return NextResponse.json(userPlaylists, { status: 201 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
@@ -163,8 +203,6 @@ export async function PATCH(request) {
 
     const playlist = searchParams.get("playlist");
     const song = searchParams.get("song");
-
-    console.log(playlist, song);
 
     const findedPlaylist = await prisma.playList.findUnique({
       where: {
@@ -206,7 +244,6 @@ export async function PATCH(request) {
 
     return NextResponse.json(userPlaylist, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }

@@ -1,15 +1,17 @@
 "use client";
 import BentogridPlaylists from "@/components/pages/home/bentogrid-playlists";
-import { useUserDataStore } from "@/store/UserDataStore";
+
 import { Card, CardBody } from "@nextui-org/react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PlayListCard from "./playlists/components/playlist-card";
-import SongCard from "@/components/song-card/SongCard";
+
 import { motion } from "framer-motion";
 import { appearanceAnimation } from "@/constants/appearance-animation-config";
+import { useUserDataStore } from "@/store/user-data-store";
+import SongCard from "@/components/song-card/song-card";
 
 const MotionCard = motion(Card);
 
@@ -41,6 +43,10 @@ export default function Home() {
       searchUserData();
     }
   }, [status]);
+
+  useEffect(() => {
+    document.title = "MusicApp - Inicio";
+  }, []);
 
   return (
     <div className="flex flex-col">

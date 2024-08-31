@@ -1,4 +1,3 @@
-import { useUserDataStore } from "@/store/UserDataStore";
 import {
   Avatar,
   Dropdown,
@@ -10,7 +9,8 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { IoLogOut, IoSettings } from "react-icons/io5";
-import ThemeSwitch from "./ThemeSwitch";
+import ThemeSwitch from "./theme-switch";
+import { useUserDataStore } from "@/store/user-data-store";
 
 const ProfileDropdown = ({ user }) => {
   const { setFavorites, setPlaylists } = useUserDataStore();

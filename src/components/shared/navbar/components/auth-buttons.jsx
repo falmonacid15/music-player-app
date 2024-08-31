@@ -1,4 +1,4 @@
-import { Link, NavbarItem } from "@nextui-org/react";
+import {  NavbarItem } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
 import React from "react";

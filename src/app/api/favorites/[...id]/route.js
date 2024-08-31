@@ -74,7 +74,6 @@ export async function GET(request, { params }) {
 
     return NextResponse.json(favorites, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: "Algo salio mal" }, { status: 400 });
   }
 }
@@ -114,7 +113,6 @@ export async function DELETE(request, { params }) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: "Algo salio mal" }, { status: 400 });
   }
 }

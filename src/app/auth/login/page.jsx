@@ -2,7 +2,7 @@
 
 import { Button, Input, Link } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react";
@@ -47,6 +47,10 @@ const LoginPage = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    document.title = "MusicApp - Iniciar sesion";
+  }, []);
 
   return (
     <div className="flex flex-col h-screen w-full items-center">

@@ -1,4 +1,4 @@
-import { useMusicAppStore } from "@/store/MusicAppStore";
+import { useMusicAppStore } from "@/store/music-app-store";
 import { Card, CardHeader, Image } from "@nextui-org/react";
 import { IoPause, IoPlay } from "react-icons/io5";
 

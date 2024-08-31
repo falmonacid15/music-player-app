@@ -1,9 +1,9 @@
-import { useMusicAppStore } from "@/store/MusicAppStore";
-import { Button, Card, CardFooter, CardHeader, Image } from "@nextui-org/react";
+import { Button, Card, CardFooter, Image } from "@nextui-org/react";
 
 import React from "react";
 import { IoPause, IoPlay } from "react-icons/io5";
 import SongCardHeader from "./components/song-card-header";
+import { useMusicAppStore } from "@/store/music-app-store";
 
 const SongCard = ({
   id,

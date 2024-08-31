@@ -3,7 +3,7 @@
 import { Button, Input, Link } from "@nextui-org/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { PiImageFill, PiXBold } from "react-icons/pi";
 import { toast } from "react-toastify";
@@ -44,6 +44,10 @@ const RegisterPage = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    document.title = "MusicApp - Crear cuenta";
+  }, []);
 
   return (
     <div className="flex flex-col  w-full items-center py-8">
